@@ -1,0 +1,22 @@
+def knapsack(W,p,val,n):
+    k = [[0 for x in range (W+1)] for x in range (n+1)]
+
+    for i in range(n+1):
+        for W in range(W+1):
+            if i == 0 or W == 0:
+                k[i][W] = 0
+            elif p[i-1] <= W:
+                k[i][W] = max(val[i-1]+k[i-1][W-p[i-1]],k[i-1][W])
+            else:
+                k[i][W] = k[i-1][W]
+
+    return k[n][W]
+#driver code
+val = [60, 100, 120]
+p = [10, 20, 30]
+W = 50
+n = len(val)
+print("Values:", val)
+print("Weights:", p)
+print("Knapsack Capacity:", W)
+print("max weight: ",knapsack(W,p,val,n))

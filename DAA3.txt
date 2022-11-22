@@ -1,0 +1,28 @@
+class items:
+
+    def __init__(self,value,weight):
+        self.value = value
+        self.weight = weight
+
+def fracknapsack(w,arr):
+    arr.sort(key = lambda x:(x.value/x.weight),reverse = True)
+    for item in arr:
+        print(item.value,item.weight,item.value/item.weight)
+
+    finalvalue = 0.0
+
+    for item in arr:
+        if item.weight <= w:
+            w -= item.weight
+            finalvalue += item.value
+        else:
+            finalvalue += item.value*w/item.weight
+            break
+    return finalvalue
+
+if __name__ == '__main__':
+    w = 50
+    arr = [items(60,10),items(100,20),items(120,30)]
+    max_value = fracknapsack(w,arr)
+    print("knapsack capacity: ",w)
+    print("max value we can obtain: {}".format(max_value))
